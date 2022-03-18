@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wCEAXv+H4sIAAAAAAAA/+ySPW/bMBCGNetXHLwEKECL+opjLUWXzhmKrsWZOimE+KEcKaPOry8kS20KFBlbFPGzHMnjvXevxOyMnHXetMQhcy9ZLh8G89y3RXQnaUtrv5nSVt8rKaXsXfYlU96OTCFo14uILPqX/OF4PNb1Ia+ySCGK4XImdl6M3uwvaE0y195X1RIP9/USZXHdLzlZJXlV5LUs67rKE1kW5aFIQCZ/gSlE5ERKHqbWv3EvROy6N/Krl5/xPwFH/ZU4aO8aWH/cXvvsnKeDdm0Dj95odUktRWwxYpMCOLTUANPzpJmEwROZkIaR1Jw8o9EtRu3dZ9RmYvqk4iJOrvOsKAXgyVCY74pVSj2RGkTneRMDALAY1VOzLAHQXbalAKbgJ1ZXjY152t8OBDz6dtmvI9GWtRQC9tTAbmkHdziO+2E6ETuKFGb781x3oMPmst2ttSPGSOx+NXr9YTauLl6fAPy5RwO7jx92//oN3Lhx433yIwAA//9ZrLEpAAgAAAEAAP//XLA+WoQBAAA=
+    cosign.sigstore.dev/signature: MEUCIQDrNFCacYywHNPXpt+8lj4Q9QKtVI9RSnhjt+wGRz1i1gIgOJKLUWHSAZill5gj/cJATITIyi0nbGZFUjnBAMlEk4I=
+  name: require-labels
+spec:
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    name: check-for-labels
+    validate:
+      message: label 'app.kubernetes.io/name' is required
+      pattern:
+        metadata:
+          labels:
+            app.kubernetes.io/name: ?*
+  validationFailureAction: enforce

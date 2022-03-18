@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wAtAdL+H4sIAAAAAAAA/+yRv26zMBTFmXkKi/kD2xjiiBf49qrqUkXVDTjEwn/otUnbPH0FSTNmbNWK33KOz7EH30tPgPTgTacwUHemnG0H89p3ZXR7ZoW1L0bY6r1ijLHe0UfaejuiCkG7Po+AeX/mgksuylLQqELM0RtVfIA1yRfz201VLSo39aKsvJwvVia8KnnNRC1lnTDBpJAJYck3MIUImDCGw9T5O/dChMPhTn/9y01/CTDqJ4VBe9cQ3ENbwBSPHvUZovauGLah0J6eeDpo1zXkwRuVWhWhgwhNSogDqxpyW3yKk1FhLnICo/6PfhpDQ56zbJcSQgiq4Cds1ZKNvgvX/KRwv2S9itk/kr1BbI+zMTrEbJf+9JhWVlZW/hyfAQAA//+SjYQOAAgAAAEAAP//3YUUey0BAAA=
+    cosign.sigstore.dev/signature: MEYCIQDU90qzrKKcnB6eO/KZmJm6iqfwUa/44PTt0qIBGkMk3gIhAKqOmlQCE2ZLpkXGrdpvO/XAyKDuKsNFoICTHcIJsrR0
+  name: test-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - watch
+  - list

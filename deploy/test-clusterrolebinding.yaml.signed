@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wCIAXf+H4sIAAAAAAAA/+ySP5ObQAzFXfMpNHc1sHjBubhMinQpbm7SZgTIeOP9Q6TFif3pMwu+azLxpDh3/jUaRg9JD14kiXlnJ4nEHCy1xvfGD8UJnV29E0optanruX7YNHNV6+V57qnNqqrXVaN00ySd1puqWYF6rwOuMUlEXinFh6kPV3QScbe70r94eavlEbncBdsTS+nPZaWeDvbn0K+jb5XTzn232tW/6yQefPlSdsGNTCLGD3lEzoezbpTW6491dQPbr+BovhGLCX4L3GJX4BT3gc0Zowm+ODxJYUJ5rLJHeNkbgUtUIGUFLmEBtDb8EkB/Cp7AeIh7ggeHHgfiBxg4TCPEAEzYg1DHFCXJ0J/AoyMZsaMiOxjfb+HzsuE5WPq0zM8cRewx4jaDWb+FJbbcZjK1P6iLklo5LBO+pH0ZwKv4cgg8wld0BMkFCoGQFxPNkWYpjmZ+78pnyJLpZ9qlXX/d+nba4i9PXomz/xt8wx98586dO//gTwAAAP//pIxyzgAIAAABAAD//wuyuuGIAQAA
+    cosign.sigstore.dev/signature: MEUCICsdLTgbm39iXy1niwnnNblbbDWShfkLSASM+ZEoKI2lAiEAoUKmogh87GUMreaTaqj4ylw3/ByX3wixwSi0lv9qUYk=
+  name: test-crb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: secret-reader
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: manager

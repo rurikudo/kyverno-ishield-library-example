@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wBDAbz+H4sIAAAAAAAA/+yRMU/7MBDFM/tTWN0T24mT9p/tz8JeECu6JJdgEtvBdirop0dpoVQgdSxCym95tu/unazHduBYa4cGnWdmzwTf9MNL16TBVFxnWj8OmZavknPOO8PuWW316NB7Zbo4gIu7fSoyKbJ/RbFmAX2InR2wUqZRpkveQA/RPFtIedB1kR+Up8f7jBQiEjIVOc/yPE0jnqVZLiPKoysw+QAu4tz1U2Mv9PkAbXuh/vGXk/4RYFQP6LyypqSugjqBKTxZp/YQlDVJv/GJsmwnSK9MU9KtHfDmmC3RGKCBACWh1IDGkn6Pn8znLbZzB4zq1tlpvLCGUPq15acp8VP1jHXws118ZrhaEUo/Z+/Q7VSN/+vaTiYcCmc+Hk4vfoQaS9pgC9MQyG8HsbCwsHBl3gMAAP//tNT5+AAIAAABAAD//64Z1fhDAQAA
+    cosign.sigstore.dev/signature: MEUCIAd+pKkqhYysRFtl8XlfYUeVdt2r5zPmIHuvJYnGFmopAiEAmlhGFBXRaUnTYPVFbyNfOglnm2rCUaLx3xmNrOfMKDg=
+  name: test-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: test-role
+subjects:
+- apiGroup: ""
+  kind: ServiceAccount
+  name: test-sa
+  namespace: default

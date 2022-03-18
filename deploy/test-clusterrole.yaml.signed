@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wCMAXP+H4sIAAAAAAAA/+ySzY7TQAzHc85TWNnrtpl8tFv1ygGOCCouaIXciZMOncwE2ynQp0dJdleclhsIqb9DbOdve2Zk5xfkvI2+IZY8XPPC7M7+W9eUGo6mr/r+i6/6+kdtjDFdyA+5jf3AJOJCt1LkVXctd6Z8qIttXeVKoivrR1Fijp7WP7H3yVS7revZPmw3szXlEk9sKpMUdVlsTLXZ1kViqrIuywRM8hcYRZETY/g8NvGVPFFs21f0p7e82P8EHNwnYnEx7IGPaNc46imyu6K6GNbnnaxdzC9Fenah2cObZbYfoqe0J8UGFfcpwB1kAXuSAS1lEHunSg2IC5Z+rxFAJghR4SW7SWEO9rAsz7Q2KY+eZOq7AhzcW47jIHv4nGWPKQDA3fIFVNATwbvD4T14upC/n+OpHcR29pkkjmwJ2siA1i6bCx/JMulTm3j8SlYFnEAmsyDZLD0Xz2c/K8sVLsTH+XdHmt1D9h3VnibHO9HsMf3Xc71x48aNP/ErAAD///S1YmwACAAAAQAA//+O+vFCjAEAAA==
+    cosign.sigstore.dev/signature: MEYCIQD+Fm0gkY671aBU+9eyanIg/PGsCfVYvKnImBg62GV5KQIhAJaYFRcsudLyuIlr7xWVbUj7FL1Akze/9tS65oC2DvO5
+  name: test-crole
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - watch
+  - list

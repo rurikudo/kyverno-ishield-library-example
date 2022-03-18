@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  color: blue
+kind: ConfigMap
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wD2AAn/H4sIAAAAAAAA/+zRu07sMBAGYNd5Cr9AjseXZA9pqekQLZpNHMuKL8F2VrBPjzZcJJoVFQjJX/PLGk8x+tkJE5ujm3TKLJwZh/+LezKTKOEIXnr/6KRXzwoAwAR2z8bo16RztsG0BVNrzkJIEDdc9JIVnUs7xjBb43H994LeEUIuu71Sex76bk8Qb+8LLiThSvAOZNepAwEpgPeEAvkBWy6YCEBatile+ZcLzvOV+fstn/lH4GofdMo2hoGeeLPYMA30dm/wDtfG64ITFhwaSgN6PdCvFTcfwzG6mAZ6dJv+7ZOqqqqqb3gNAAD//zasr2sACAAAAQAA//8/2+Lm9gAAAA==
+    cosign.sigstore.dev/signature: MEYCIQCDSgbVRA1u4sOoZJ9ODdYGX5CdaWOP30NcbwZM+mPt6gIhAOI6oJc5Ev2hLCziVd4qe7pLP396QYJYKfqNB318zkK9
+  name: test-configmap

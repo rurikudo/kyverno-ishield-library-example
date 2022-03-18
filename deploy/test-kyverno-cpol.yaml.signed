@@ -1,0 +1,40 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wD5Agb9H4sIAAAAAAAA/+xU32/bNhD2s/+Kg1/aArEs/8pavaxBhwJ72YIh2MswLGfyLHGmeCp5tKMW/d8HSk6sJE32MmwYkHuhSN599313R8326Gdbtpp8mLnPs3n+dmc/lXohbpPXy7r+wy7r1c0qz/O8dLOrmeK68RSCceVU0E/Lz6vF6t3q3dvlfDkTCjLdtXvyjqeqYZu1WNsUe75ajdL63fm6W/NFv+++1uej+WoxX+fL9XqxHuXLxXq5HEE++hcsBkE/ynO/i5qf8QuC2+0z90cxd+v/xLAxv5IPhl0Bx8Zlhmf7+XhnnC7gg41ByF+yNaod1ySoUbAYAzisqQC0lg+kp+gcC4phF8YAg11yBWhSvKGQDXKIEUsFXPQIcHEP4dshCoVK9m0BP0tF/km/QHvyRtoCatIm1p3j4P52RPe30ufZeZY/CVcb9w3PIV7ckHckFE6Qk3m2WE6ephg3f5KSAi5Znw3EPxmgKShvGunBf8FUAJAKHShPKMaVgKDJtWBNEODtsAtnYARqbGFDULMniIG20YIwdNokIUkfiU73kATo+gb3F4fKqAqkIpfyGAqArgVOREIGV5UJPfEWNNXsgngUClDxIeXpgeTAQ15wMFIBQmhIma1RsKO2m6zEf2vjjdJJe0ptqVOXdPYpe8qawbFATZQ0EDQoQt5l0NlknJDTDO7RGt0l/YjGRk8Xqi8lRm1kDLBBtSs9xzT14iONAXy0dBzg6YN577k9GPtkNYqqiuMmvYT2tEkwngJHr25xT5be26PDFHHJ+nh61EAnr5pCwJIKuKoI2NkWsGk870nDRxtvPvxwr9joCa5PVVV8uO66PTjTXF5nd/Cp4ENKip02g2d9p9Lah8ynqZUFTL58AU+fIgXJuJv47PYnkg2oZTtqw+v3b377XrETNC68fn8Gr068Xr35Hb5+nTwqDzfkUdgXcOHan1h+dI9c9mgjPS5sonivFn/jobkc/9d/6xd7sRd7sX/O/goAAP//yOWEKQAMAAABAAD//8bWIm35AgAA
+    cosign.sigstore.dev/signature: MEUCIA2xUV6ahGBvrBN4XjfEYp7Zk8zPrMK+SeZChyhQsMQ9AiEA6ZUfTY4JVcaa2mnphzspBysRyHe8mvogjonl8tK+EXs=
+    kyverno.io/kubernetes-version: "1.23"
+    kyverno.io/kyverno-version: 1.6.0
+    policies.kyverno.io/category: Other
+    policies.kyverno.io/description: 'Rather than creating a deny list of annotations,
+      it may be more useful to invert that list and create an allow list which then
+      denies any others. This policy demonstrates how to allow two annotations with
+      a specific key name of fluxcd.io/ while denying others that do not meet the
+      pattern.      '
+    policies.kyverno.io/minversion: 1.6.0
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: Pod, Annotation
+    policies.kyverno.io/title: Allowed Annotations
+  name: allowed-annotations
+spec:
+  background: true
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    name: allowed-fluxcd-annotations
+    validate:
+      deny:
+        conditions:
+          all:
+          - key: '{{ request.object.metadata.annotations.keys(@)[?contains(@, ''fluxcd.io/'')]
+              }}'
+            operator: AnyNotIn
+            value:
+            - fluxcd.io/cow
+            - fluxcd.io/dog
+      message: The only approved FluxCD annotations are `fluxcd.io/cow` and `fluxcd.io/dog`.
+  validationFailureAction: audit
