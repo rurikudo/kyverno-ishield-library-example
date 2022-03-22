@@ -110,7 +110,7 @@ echo ""
 echo "--------------------"
 echo "     ClusterRole    "
 echo "--------------------"
-echo"[TEST 1] Resource without Signature should be blocked"
+echo "[TEST 1] Resource without Signature should be blocked"
 kubectl create -f deploy/test-clusterrole.yaml
 
 sleep 2
@@ -229,7 +229,7 @@ sleep 2
 echo ""
 echo ""
 echo "--------------------"
-echo "       Policy       "
+echo "   Kyverno Policy   "
 echo "--------------------"
 echo "[TEST 1] Resource without Signature should be blocked"
 kubectl create -f deploy/test-kyverno-pol.yaml -n test-ns
@@ -246,9 +246,9 @@ kubectl get pol -n test-ns
 sleep 2
 echo ""
 echo ""
-echo "--------------------"
-echo "   ClusterPolicy    "
-echo "--------------------"
+echo "-----------------------"
+echo " Kyverno ClusterPolicy "
+echo "-----------------------"
 echo "[TEST 1] Resource without Signature should be blocked"
 kubectl create -f deploy/test-kyverno-cpol.yaml 
 

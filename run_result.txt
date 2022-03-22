@@ -1,0 +1,323 @@
+$ ./auto_run.sh                                                                                                                  ?[main]
+[1] Creating test namespace
+namespace/test-ns created
+
+[2] Installing Kyverno
+namespace/kyverno created
+customresourcedefinition.apiextensions.k8s.io/clusterpolicies.kyverno.io created
+customresourcedefinition.apiextensions.k8s.io/clusterpolicyreports.wgpolicyk8s.io created
+customresourcedefinition.apiextensions.k8s.io/clusterreportchangerequests.kyverno.io created
+customresourcedefinition.apiextensions.k8s.io/generaterequests.kyverno.io created
+customresourcedefinition.apiextensions.k8s.io/policies.kyverno.io created
+customresourcedefinition.apiextensions.k8s.io/policyreports.wgpolicyk8s.io created
+customresourcedefinition.apiextensions.k8s.io/reportchangerequests.kyverno.io created
+serviceaccount/kyverno-service-account created
+role.rbac.authorization.k8s.io/kyverno:leaderelection created
+role.rbac.authorization.k8s.io/manifest-verify-dry-run created
+clusterrole.rbac.authorization.k8s.io/kyverno:admin-generaterequest created
+clusterrole.rbac.authorization.k8s.io/kyverno:admin-policies created
+clusterrole.rbac.authorization.k8s.io/kyverno:admin-policyreport created
+clusterrole.rbac.authorization.k8s.io/kyverno:admin-reportchangerequest created
+clusterrole.rbac.authorization.k8s.io/kyverno:events created
+clusterrole.rbac.authorization.k8s.io/kyverno:generate created
+clusterrole.rbac.authorization.k8s.io/kyverno:policies created
+clusterrole.rbac.authorization.k8s.io/kyverno:userinfo created
+clusterrole.rbac.authorization.k8s.io/kyverno:view created
+clusterrole.rbac.authorization.k8s.io/kyverno:webhook created
+rolebinding.rbac.authorization.k8s.io/kyverno:leaderelection created
+rolebinding.rbac.authorization.k8s.io/manifest-verify-dry-run created
+clusterrolebinding.rbac.authorization.k8s.io/kyverno:events created
+clusterrolebinding.rbac.authorization.k8s.io/kyverno:generate created
+clusterrolebinding.rbac.authorization.k8s.io/kyverno:policies created
+clusterrolebinding.rbac.authorization.k8s.io/kyverno:userinfo created
+clusterrolebinding.rbac.authorization.k8s.io/kyverno:view created
+clusterrolebinding.rbac.authorization.k8s.io/kyverno:webhook created
+configmap/kyverno created
+configmap/kyverno-metrics created
+service/kyverno-svc created
+service/kyverno-svc-metrics created
+deployment.apps/kyverno created
+
+----------
+[3] Checking if Kyverno pod is ready
+No resources found in kyverno namespace.
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is ready
+
+----------
+[4] Installing Kyverno cluster-policy for kubernets default resources
+clusterpolicy.kyverno.io/verify-resources created
+
+----------
+[5] Installing Kyverno cluster-policy for kyverno policy
+clusterpolicy.kyverno.io/verify-kyverno-policy created
+
+----------
+[6] Checking if policies are ready to serve admission requests
+Policies are not ready...
+Policies are ready
+
+----------
+[7] Testing.....
+
+--------------------
+        Role
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-role.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Role/test-ns/test-role was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+role.rbac.authorization.k8s.io/test-role created
+
+
+--------------------
+     RoleBinding
+--------------------
+./auto_run.sh: line 98: echo[TEST 1] Resource without Signature should be blocked: command not found
+Error from server: error when creating "deploy/test-rolebinding.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource RoleBinding/test-ns/test-rolebinding was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+rolebinding.rbac.authorization.k8s.io/test-rolebinding created
+
+
+--------------------
+     ClusterRole
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-clusterrole.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource ClusterRole//test-crole was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+clusterrole.rbac.authorization.k8s.io/test-crole created
+
+
+--------------------
+ ClusterRoleBinding
+--------------------
+./auto_run.sh: line 128: echo[TEST 1] Resource without Signature should be blocked: command not found
+Error from server: error when creating "deploy/test-clusterrolebinding.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource ClusterRoleBinding//test-crb was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+clusterrolebinding.rbac.authorization.k8s.io/test-crb created
+
+
+--------------------
+       Secret
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-secret.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Secret/test-ns/test-creds was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+secret/test-creds created
+
+
+--------------------
+      ConfigMap
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-configmap.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource ConfigMap/test-ns/test-configmap was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+configmap/test-configmap created
+
+
+--------------------
+     Deployment
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-deployment.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Deployment/test-ns/test-deployment was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+deployment.apps/test-deployment created
+
+
+[TEST 3] Pod should be created
+Pod is ready
+NAME                               READY   STATUS    RESTARTS   AGE
+test-deployment-66b6c48dd5-599wm   1/1     Running   0          2s
+
+
+--------------------
+       Service
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-service.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Service/test-ns/test-service was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+service/test-service created
+
+
+--------------------
+   ServiceAccount
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-serviceaccount.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource ServiceAccount/test-ns/test-sa was blocked due to the following policies
+
+verify-resources:
+  verify-sample-resources: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+serviceaccount/test-sa created
+
+
+--------------------
+   Kyverno Policy
+--------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-kyverno-pol.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Policy/test-ns/require-labels was blocked due to the following policies
+
+verify-kyverno-policy:
+  verify-kyverno-policy: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+policy.kyverno.io/require-labels created
+
+Getting Policy...
+NAME             BACKGROUND   ACTION    READY
+require-labels   true         enforce
+
+
+-----------------------
+ Kyverno ClusterPolicy
+-----------------------
+[TEST 1] Resource without Signature should be blocked
+Error from server: error when creating "deploy/test-kyverno-cpol.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource ClusterPolicy//allowed-annotations was blocked due to the following policies
+
+verify-kyverno-policy:
+  verify-kyverno-policy: 'reason: failed to verify signature: failed to get signature:
+    `cosign.sigstore.dev/message` is not found in the annotations'
+
+
+[TEST 2] Resource with Signature should be allowed
+clusterpolicy.kyverno.io/allowed-annotations created
+
+Getting ClusterPolicy...
+NAME                    BACKGROUND   ACTION    READY
+allowed-annotations     true         audit
+verify-kyverno-policy   false        enforce   true
+verify-resources        false        enforce   true
+
+
+[8] Cleaning test kyverno policies......
+clusterpolicy.kyverno.io "verify-kyverno-policy" deleted
+clusterpolicy.kyverno.io "verify-resources" deleted
+
+
+[9] Cleaning test resources......
+warning: deleting cluster-scoped resources, not scoped to the provided namespace
+clusterrole.rbac.authorization.k8s.io "test-crole" deleted
+clusterrolebinding.rbac.authorization.k8s.io "test-crb" deleted
+configmap "test-configmap" deleted
+deployment.apps "test-deployment" deleted
+clusterpolicy.kyverno.io "allowed-annotations" deleted
+policy.kyverno.io "require-labels" deleted
+role.rbac.authorization.k8s.io "test-role" deleted
+rolebinding.rbac.authorization.k8s.io "test-rolebinding" deleted
+secret "test-creds" deleted
+service "test-service" deleted
+Error from server (NotFound): error when deleting "deploy/test-serviceaccount.yaml.signed": serviceaccounts "test-sa" not found
+[10] Deleting Kyverno
+namespace "kyverno" deleted
+customresourcedefinition.apiextensions.k8s.io "clusterpolicies.kyverno.io" deleted
+customresourcedefinition.apiextensions.k8s.io "clusterpolicyreports.wgpolicyk8s.io" deleted
+customresourcedefinition.apiextensions.k8s.io "clusterreportchangerequests.kyverno.io" deleted
+customresourcedefinition.apiextensions.k8s.io "generaterequests.kyverno.io" deleted
+customresourcedefinition.apiextensions.k8s.io "policies.kyverno.io" deleted
+customresourcedefinition.apiextensions.k8s.io "policyreports.wgpolicyk8s.io" deleted
+customresourcedefinition.apiextensions.k8s.io "reportchangerequests.kyverno.io" deleted
+serviceaccount "kyverno-service-account" deleted
+role.rbac.authorization.k8s.io "kyverno:leaderelection" deleted
+role.rbac.authorization.k8s.io "manifest-verify-dry-run" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:admin-generaterequest" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:admin-policies" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:admin-policyreport" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:admin-reportchangerequest" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:events" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:generate" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:policies" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:userinfo" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:view" deleted
+clusterrole.rbac.authorization.k8s.io "kyverno:webhook" deleted
+rolebinding.rbac.authorization.k8s.io "kyverno:leaderelection" deleted
+rolebinding.rbac.authorization.k8s.io "manifest-verify-dry-run" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kyverno:events" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kyverno:generate" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kyverno:policies" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kyverno:userinfo" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kyverno:view" deleted
+clusterrolebinding.rbac.authorization.k8s.io "kyverno:webhook" deleted
+configmap "kyverno" deleted
+configmap "kyverno-metrics" deleted
+service "kyverno-svc" deleted
+service "kyverno-svc-metrics" deleted
+deployment.apps "kyverno" deleted
+[11] Deleting test namespace
+namespace "test-ns" deleted
