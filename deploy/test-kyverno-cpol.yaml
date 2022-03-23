@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: allowed-annotations
+  name: test-allowed-annotations
   annotations:
     policies.kyverno.io/title: Allowed Annotations
     policies.kyverno.io/category: Other

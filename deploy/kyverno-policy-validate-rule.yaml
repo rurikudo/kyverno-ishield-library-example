@@ -1,0 +1,39 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-resources
+spec:
+  validationFailureAction: enforce
+  background: false
+  webhookTimeoutSeconds: 30
+  failurePolicy: Fail  
+  rules:
+    - name: validate-resources
+      match:
+        resources:
+          kinds:
+            - ClusterRole
+            - ClusterRoleBinding
+            - ConfigMap
+            - Deployment
+            - Pod
+            - Role
+            - RoleBinding
+            - Secret
+            - Service
+            - ServiceAccount
+            - ClusterPolicy
+            - Policy
+          name: test*
+      validate:
+        key: |-
+          -----BEGIN PUBLIC KEY-----
+          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
+          BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
+          -----END PUBLIC KEY-----
+        ignoreFields:
+        - fields:
+          - metadata.annotations.manifest-verify.kyverno.io/result
+          - metadata.annotations.policies.kyverno.io/last-applied-patches
+          objects:
+          - name: '*'

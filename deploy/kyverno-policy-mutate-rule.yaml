@@ -1,14 +1,12 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: verify-resources
+  name: mutate-verified-resources
 spec:
-  validationFailureAction: enforce
   background: false
-  webhookTimeoutSeconds: 30
   failurePolicy: Fail  
   rules:
-    - name: verify-sample-resources
+    - name: mutate-verified-resources
       match:
         resources:
           kinds:
@@ -22,10 +20,22 @@ spec:
             - Secret
             - Service
             - ServiceAccount
+            - ClusterPolicy
+            - Policy
           name: test*
-      validate:
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            annotations:
+              +(manifest-verify.kyverno.io/result): "true"     
         key: |-
           -----BEGIN PUBLIC KEY-----
           MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
           BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
           -----END PUBLIC KEY-----
+        ignoreFields:
+        - fields:
+          - metadata.annotations.manifest-verify.kyverno.io/result
+          - metadata.annotations.policies.kyverno.io/last-applied-patches
+          objects:
+          - name: '*'

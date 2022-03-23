@@ -2,9 +2,9 @@ apiVersion: kyverno.io/v1
 kind: Policy
 metadata:
   annotations:
-    cosign.sigstore.dev/message: H4sIAAAAAAAA/wCEAXv+H4sIAAAAAAAA/+ySPW/bMBCGNetXHLwEKECL+opjLUWXzhmKrsWZOimE+KEcKaPOry8kS20KFBlbFPGzHMnjvXevxOyMnHXetMQhcy9ZLh8G89y3RXQnaUtrv5nSVt8rKaXsXfYlU96OTCFo14uILPqX/OF4PNb1Ia+ySCGK4XImdl6M3uwvaE0y195X1RIP9/USZXHdLzlZJXlV5LUs67rKE1kW5aFIQCZ/gSlE5ERKHqbWv3EvROy6N/Krl5/xPwFH/ZU4aO8aWH/cXvvsnKeDdm0Dj95odUktRWwxYpMCOLTUANPzpJmEwROZkIaR1Jw8o9EtRu3dZ9RmYvqk4iJOrvOsKAXgyVCY74pVSj2RGkTneRMDALAY1VOzLAHQXbalAKbgJ1ZXjY152t8OBDz6dtmvI9GWtRQC9tTAbmkHdziO+2E6ETuKFGb781x3oMPmst2ttSPGSOx+NXr9YTauLl6fAPy5RwO7jx92//oN3Lhx433yIwAA//9ZrLEpAAgAAAEAAP//XLA+WoQBAAA=
-    cosign.sigstore.dev/signature: MEUCIQDrNFCacYywHNPXpt+8lj4Q9QKtVI9RSnhjt+wGRz1i1gIgOJKLUWHSAZill5gj/cJATITIyi0nbGZFUjnBAMlEk4I=
-  name: require-labels
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wCHAXj+H4sIAAAAAAAA/+ySvY7bMAzHPecpiCwHFFAs2c4HvBRdOt9QdC0YmfYJ1oePkoPmnr6wY7dXoLixRXH5LZREin9SVH5BzttgG+KY+5dcyVNvn7umSP4sXencN1u66nslpZSdz7/kOriBKUbjO5GQRfdS7pUqiuJ0UnmimER/vRD7IIZgd1d0NpvuHqpqtsfDfrayuO1nn1KZqgp12B/l4SgzWRZldcxAZn+BMSbkTEruxya8ERcTtu0b/qWXn/Y/AQfzlTia4GtYBrczIb+oTW98U8NjsEZfN44SNpiw3gB4dFTDPGqm59EwCYtnsnETB9JTxAWtaTCZ4D+jsSPTJ51mBfJtYE0bAB4txSlWLPn0E+letIHXZAAADpN+quclAPrruhTAFMPI+pZjZSr5twMBj6GZ90tJtHodxYgd1bCd5eABh2HXj2diT4ni9AZTXQ9gIixdNtvl7oApEftfQq9fZ+XWxesTgD9r1LD9+GH7rz/CnTt33h0/AgAA///DrDqhAAgAAAEAAP//PggIUocBAAA=
+    cosign.sigstore.dev/signature: MEYCIQD7VQAMYFy4LoFC8QR9r63Uork5jasg1zAtGXIbNon64wIhAJErav/Psb+J/Uh/FGSXj5ZCZ7bKyJZQR6XHkuCAC2Uy
+  name: test-require-labels
 spec:
   rules:
   - match:

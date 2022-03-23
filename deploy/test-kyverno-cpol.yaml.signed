@@ -2,8 +2,8 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   annotations:
-    cosign.sigstore.dev/message: H4sIAAAAAAAA/wD5Agb9H4sIAAAAAAAA/+xU32/bNhD2s/+Kg1/aArEs/8pavaxBhwJ72YIh2MswLGfyLHGmeCp5tKMW/d8HSk6sJE32MmwYkHuhSN599313R8326Gdbtpp8mLnPs3n+dmc/lXohbpPXy7r+wy7r1c0qz/O8dLOrmeK68RSCceVU0E/Lz6vF6t3q3dvlfDkTCjLdtXvyjqeqYZu1WNsUe75ajdL63fm6W/NFv+++1uej+WoxX+fL9XqxHuXLxXq5HEE++hcsBkE/ynO/i5qf8QuC2+0z90cxd+v/xLAxv5IPhl0Bx8Zlhmf7+XhnnC7gg41ByF+yNaod1ySoUbAYAzisqQC0lg+kp+gcC4phF8YAg11yBWhSvKGQDXKIEUsFXPQIcHEP4dshCoVK9m0BP0tF/km/QHvyRtoCatIm1p3j4P52RPe30ufZeZY/CVcb9w3PIV7ckHckFE6Qk3m2WE6ephg3f5KSAi5Znw3EPxmgKShvGunBf8FUAJAKHShPKMaVgKDJtWBNEODtsAtnYARqbGFDULMniIG20YIwdNokIUkfiU73kATo+gb3F4fKqAqkIpfyGAqArgVOREIGV5UJPfEWNNXsgngUClDxIeXpgeTAQ15wMFIBQmhIma1RsKO2m6zEf2vjjdJJe0ptqVOXdPYpe8qawbFATZQ0EDQoQt5l0NlknJDTDO7RGt0l/YjGRk8Xqi8lRm1kDLBBtSs9xzT14iONAXy0dBzg6YN577k9GPtkNYqqiuMmvYT2tEkwngJHr25xT5be26PDFHHJ+nh61EAnr5pCwJIKuKoI2NkWsGk870nDRxtvPvxwr9joCa5PVVV8uO66PTjTXF5nd/Cp4ENKip02g2d9p9Lah8ynqZUFTL58AU+fIgXJuJv47PYnkg2oZTtqw+v3b377XrETNC68fn8Gr068Xr35Hb5+nTwqDzfkUdgXcOHan1h+dI9c9mgjPS5sonivFn/jobkc/9d/6xd7sRd7sX/O/goAAP//yOWEKQAMAAABAAD//8bWIm35AgAA
-    cosign.sigstore.dev/signature: MEUCIA2xUV6ahGBvrBN4XjfEYp7Zk8zPrMK+SeZChyhQsMQ9AiEA6ZUfTY4JVcaa2mnphzspBysRyHe8mvogjonl8tK+EXs=
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wD+AgH9H4sIAAAAAAAA/+xU32/bNhD2s/+KQ17aArEs/0pavaxBhwJ72YIh2MswLGfyLHGmeCp5tKMW/d8HSnasNE33MmwokHuhSN599313R0136Kcbtpp8mLqP01n+ems/lHoubp3Xi7r+0y7q5d0yz/O8dNObqeK68RSCceVE0E/Kj4v5m9Wb16vVajYVCjLZtjvyjieqYZu1WNsUe7FcjtJ6ebHq1nze77uvi8VotpzPLlaX+WW+GOWL+Wo5G0E++g8sBkE/ynO/jZq/4RcEN5tv3B/E3K/fiWFjfiMfDLsCDo3LDE93s/HWOF3AOxuDkL9ma1Q7rklQo2AxBnBYUwFdx9Fa3pOeoHMsKIZdGAMMdskfoEkghkI2SCRGLBVw1SPA1QOEr4coFCrZtwX8IhX5J/0C7cgbaQuoSZtYd46D++Oc7o76Z9lFlj8JVxv3Fc8hXlyTdyQUTpBns2y+OHuaYlz/RUoKuGZ9PhD/ZICmoLxppAf/FVMBQCp0oDyhGFcCgibXgjVBgDfDLpyDEaixhTVBzZ4gBtpEC8LQaZOEJH0kOt1DEqCDrsH9xb4yqgKpyKU8hgKga4ETkZDBTWVCT7wFTTW7IB6FAlS8T3l6INnzkBfsjVSAEBpSZmMUbKntxivx39h4p3TSnlJb6tQlnX3KnrJmcCxQEyUNBA2KkHcZdHY2TshpBndoje6Svkdjo6cr1ZcSozYyBlij2paeYxp98ZHGAD5aOgzw5DD0x3nvuX0x9slqFFUVh016Ce1pk2A8BY5eHXFPlh7do8MUcc36cHrQQCevmkLAkgq4qQjY2RawaTzvSMN7G+/e/fig2OgJbk9VVby/7bo9ONNc3mb38KngQ0qKnTaDZ32v0tovmU9SKws4+/QJPH2IFCTjbuKz458kG1DLttSGl29f/f6DYidoXHj59hxenHi9ePUHfP589qg83JBHYV/AlWt/ZvnJPXLZoY30uLCJ4oNa/IOH5nL8f/+yn+3Znu3Z/hX7OwAA//80b9oXAAwAAAEAAP//VY+MZf4CAAA=
+    cosign.sigstore.dev/signature: MEUCID+mD8SE0OsxFiypYvmpPFNsAPHkYOl0NfkXjRQ6bUPgAiEA+GHKPudi6OrVQ7DfWwUJ7oGtzUz2RrERoe4o6qUcVtA=
     kyverno.io/kubernetes-version: "1.23"
     kyverno.io/kyverno-version: 1.6.0
     policies.kyverno.io/category: Other
@@ -16,7 +16,7 @@ metadata:
     policies.kyverno.io/severity: medium
     policies.kyverno.io/subject: Pod, Annotation
     policies.kyverno.io/title: Allowed Annotations
-  name: allowed-annotations
+  name: test-allowed-annotations
 spec:
   background: true
   rules:
