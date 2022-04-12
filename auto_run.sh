@@ -50,22 +50,21 @@ done
 echo ""
 echo "----------"
 echo "[4] Installing Kyverno cluster-policies"
-kubectl create -f deploy/kyverno-policy-mutate-rule.yaml
 kubectl create -f deploy/kyverno-policy-validate-rule.yaml
 
 
 echo ""
 echo "----------"
-echo "[5] Checking if policies are ready to serve admission requests"
+echo "[5] Checking if policy is ready to serve admission requests"
 while :
 do 
   logs=`kubectl logs deployment.apps/kyverno -n kyverno | grep "policy is ready to serve admission requests" | wc -l`
   counts=`echo $logs`
-  if [ "$counts" != "2" ]; then
-    echo "Policies are not ready..."
+  if [ "$counts" != "1" ]; then
+    echo "Policy is not ready..."
     sleep 5
   else
-    echo "Policies are ready"
+    echo "Policy is ready"
     break
   fi
 done
@@ -86,10 +85,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-role.yaml.signed -n test-ns
 
-echo ""
-echo "Getting annotation..."
-kubectl get role -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
-
 
 sleep 2
 echo ""
@@ -97,7 +92,7 @@ echo ""
 echo "--------------------"
 echo "     RoleBinding    "
 echo "--------------------"
-echo"[TEST 1] Resource without Signature should be blocked"
+echo "[TEST 1] Resource without Signature should be blocked"
 kubectl create -f deploy/test-rolebinding.yaml -n test-ns
 
 sleep 2
@@ -105,10 +100,6 @@ echo ""
 echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-rolebinding.yaml.signed -n test-ns
-
-echo ""
-echo "Getting annotation..."
-kubectl get rolebinding -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
 
 
 sleep 2
@@ -126,10 +117,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-clusterrole.yaml.signed 
 
-echo ""
-echo "Getting annotation..."
-kubectl get clusterrole -o yaml | grep manifest-verify.kyverno.io/result
-
 
 sleep 2
 echo ""
@@ -146,9 +133,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-clusterrolebinding.yaml.signed
 
-echo ""
-echo "Getting annotation..."
-kubectl get clusterrolebinding -o yaml | grep manifest-verify.kyverno.io/result
 
 sleep 2
 echo ""
@@ -164,10 +148,6 @@ echo ""
 echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-secret.yaml.signed -n test-ns
-
-echo ""
-echo "Getting annotation..."
-kubectl get secret -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
 
 
 sleep 2
@@ -185,10 +165,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-configmap.yaml.signed -n test-ns
 
-echo ""
-echo "Getting annotation..."
-kubectl get cm -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
-
 
 sleep 2
 echo ""
@@ -205,10 +181,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-deployment.yaml.signed -n test-ns
 
-echo ""
-echo "Getting annotation..."
-kubectl get deployment -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
-
 
 sleep 2
 echo ""
@@ -219,6 +191,7 @@ do
   ready=`kubectl get pod -n test-ns | grep test- | awk '{print $2}'`
   if [ "$ready" != "1/1" ]; then
     echo "Pod is not ready..."
+    sleep 2
   else
     echo "Pod is ready"
     kubectl get pod -n test-ns
@@ -241,10 +214,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-service.yaml.signed -n test-ns
 
-echo ""
-echo "Getting annotation..."
-kubectl get svc -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
-
 
 sleep 2
 echo ""
@@ -261,10 +230,6 @@ echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-serviceaccount.yaml.signed -n test-ns
 
-echo ""
-echo "Getting annotation..."
-kubectl get sa -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
-
 
 sleep 2
 echo ""
@@ -280,10 +245,6 @@ echo ""
 echo ""
 echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-kyverno-pol.yaml.signed -n test-ns
-
-echo ""
-echo "Getting annotation..."
-kubectl get pol -n test-ns -o yaml | grep manifest-verify.kyverno.io/result
 
 echo ""
 echo "Getting Policy..."
@@ -305,10 +266,6 @@ echo "[TEST 2] Resource with Signature should be allowed"
 kubectl create -f deploy/test-kyverno-cpol.yaml.signed
 
 echo ""
-echo "Getting annotation..."
-kubectl get cpol test-allowed-annotations -o yaml | grep manifest-verify.kyverno.io/result
-
-echo ""
 echo "Getting ClusterPolicy..."
 kubectl get cpol
 
@@ -316,7 +273,6 @@ sleep 2
 echo ""
 echo ""
 echo "[7] Cleaning test kyverno policies......"
-kubectl delete -f deploy/kyverno-policy-mutate-rule.yaml
 kubectl delete -f deploy/kyverno-policy-validate-rule.yaml
 echo ""
 echo ""
