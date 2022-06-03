@@ -13,7 +13,6 @@ customresourcedefinition.apiextensions.k8s.io/reportchangerequests.kyverno.io cr
 customresourcedefinition.apiextensions.k8s.io/updaterequests.kyverno.io created
 serviceaccount/kyverno-service-account created
 role.rbac.authorization.k8s.io/kyverno:leaderelection created
-role.rbac.authorization.k8s.io/manifest-verify-dry-run created
 clusterrole.rbac.authorization.k8s.io/kyverno created
 clusterrole.rbac.authorization.k8s.io/kyverno:admin-generaterequest created
 clusterrole.rbac.authorization.k8s.io/kyverno:admin-policies created
@@ -26,7 +25,6 @@ clusterrole.rbac.authorization.k8s.io/kyverno:userinfo created
 clusterrole.rbac.authorization.k8s.io/kyverno:view created
 clusterrole.rbac.authorization.k8s.io/kyverno:webhook created
 rolebinding.rbac.authorization.k8s.io/kyverno:leaderelection created
-rolebinding.rbac.authorization.k8s.io/manifest-verify-dry-run created
 clusterrolebinding.rbac.authorization.k8s.io/kyverno created
 configmap/kyverno created
 configmap/kyverno-metrics created
@@ -176,7 +174,7 @@ deployment.apps/test-deployment created
 [TEST 3] Pod should be created
 Pod is ready
 NAME                               READY   STATUS    RESTARTS   AGE
-test-deployment-66b6c48dd5-9w9q7   1/1     Running   0          3s
+test-deployment-66b6c48dd5-bgc4s   1/1     Running   0          2s
 
 
 --------------------
@@ -285,7 +283,6 @@ customresourcedefinition.apiextensions.k8s.io "reportchangerequests.kyverno.io" 
 customresourcedefinition.apiextensions.k8s.io "updaterequests.kyverno.io" deleted
 serviceaccount "kyverno-service-account" deleted
 role.rbac.authorization.k8s.io "kyverno:leaderelection" deleted
-role.rbac.authorization.k8s.io "manifest-verify-dry-run" deleted
 clusterrole.rbac.authorization.k8s.io "kyverno" deleted
 clusterrole.rbac.authorization.k8s.io "kyverno:admin-generaterequest" deleted
 clusterrole.rbac.authorization.k8s.io "kyverno:admin-policies" deleted
@@ -298,7 +295,6 @@ clusterrole.rbac.authorization.k8s.io "kyverno:userinfo" deleted
 clusterrole.rbac.authorization.k8s.io "kyverno:view" deleted
 clusterrole.rbac.authorization.k8s.io "kyverno:webhook" deleted
 rolebinding.rbac.authorization.k8s.io "kyverno:leaderelection" deleted
-rolebinding.rbac.authorization.k8s.io "manifest-verify-dry-run" deleted
 clusterrolebinding.rbac.authorization.k8s.io "kyverno" deleted
 configmap "kyverno" deleted
 configmap "kyverno-metrics" deleted
