@@ -12,28 +12,9 @@ spec:
       match:
         resources:
           kinds:
-            - Service
             - Deployment
-            - Pod
           name: test*
       validate:
         subject: rkudo@redhat.com
-        skipUsers:
-        - objects: 
-          - kind: ReplicaSet
-          users: 
-          - system:serviceaccount:kube-system:deployment-controller
-        - objects: 
-          - kind: Pod
-          users:  
-          - system:serviceaccount:kube-system:replicaset-controller
-        # verifyConfig:
-        #   disableDryRun: true
-        # ignoreFields:
-        # - objects:
-        #   - kind: Service
-        #   fields:
-        #   - spec.sessionAffinity
-        #   - spec.type
-        #   - spec.ipFamilies.*
-        #   - spec.ipFamilyPolicy
+        verifyConfig:
+          disableDryRun: true
