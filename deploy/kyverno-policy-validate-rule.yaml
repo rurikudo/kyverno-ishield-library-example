@@ -32,7 +32,7 @@ spec:
           BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
           -----END PUBLIC KEY-----
         verifyConfig:
-          disableDryRun: false
+          enableDryRun: true
         skipUsers:
         - objects: 
           - kind: ReplicaSet

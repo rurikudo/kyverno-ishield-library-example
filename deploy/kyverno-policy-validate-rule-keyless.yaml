@@ -16,5 +16,3 @@ spec:
           name: test*
       validate:
         subject: rkudo@redhat.com
-        verifyConfig:
-          disableDryRun: true
