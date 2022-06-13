@@ -33,6 +33,17 @@ spec:
               MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
               BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
               -----END PUBLIC KEY-----
+          - |-
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE8uGVnyDWPPlB7M5KOHRzxzPHtAy
+              FdGxexVrR4YqO1pRViKxmD9oMu4I7K/4sM51nbH65ycB2uRiDfIdRoV/+A==
+              -----END PUBLIC KEY-----
+          verifyConfig:
+            validateLogic:  mustAll # mustAll or atLeastOne
+            messageAnnotation: cosign.sigstore.dev/message
+            signatureAnnotations: 
+            - kyverno.cosign.sigstore.dev/signature
+            - cosign.sigstore.dev/signature
           skipUsers:
           - objects: 
             - kind: ReplicaSet
@@ -54,6 +65,7 @@ spec:
             - spec.type
             - spec.ipFamilies.*
             - spec.ipFamilyPolicy
+            - spec.internalTrafficPolicy
           - objects:
             - kind: ClusterPolicy
             - kind: Policy
