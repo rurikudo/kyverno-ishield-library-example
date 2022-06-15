@@ -16,5 +16,5 @@ spec:
           name: test*
       validate:
         manifest:
-          subjects: 
-          - rkudo@redhat.com
+          keys:
+          - subject: rkudo@redhat.com

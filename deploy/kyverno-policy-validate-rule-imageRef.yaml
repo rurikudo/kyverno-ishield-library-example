@@ -17,13 +17,12 @@ spec:
       validate:
         manifest:
           keys:
-          - |-
+          - key: |-
               -----BEGIN PUBLIC KEY-----
               MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
               BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
               -----END PUBLIC KEY-----
-          # signatureRef:
-          #   imageRef: ghcr.io/rurikudo/test-service-sig:latest
+          resourceBundleRef: ghcr.io/rurikudo/test-service-sig:latest
           skipUsers:
           - objects: 
             - kind: ReplicaSet
@@ -45,6 +44,7 @@ spec:
             - spec.type
             - spec.ipFamilies.*
             - spec.ipFamilyPolicy
+            - spec.internalTrafficPolicy
           - objects:
             - kind: ClusterPolicy
             - kind: Policy
