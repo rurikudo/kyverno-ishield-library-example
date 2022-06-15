@@ -26,23 +26,25 @@ spec:
             - Policy
           name: test*
       validate:
-        key: |-
-          -----BEGIN PUBLIC KEY-----
-          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
-          BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
-          -----END PUBLIC KEY-----
-        verifyConfig:
-          enableDryRun: true
-        skipUsers:
-        - objects: 
-          - kind: ReplicaSet
-          users: 
-          - system:serviceaccount:kube-system:deployment-controller
-        - objects: 
-          - kind: Pod
-          users:  
-          - system:serviceaccount:kube-system:replicaset-controller
-        - objects: 
-          - kind: Secret
-          users: 
-          - system:kube-controller-manager
+        manifest:
+          keys:
+          - key: |-
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
+              BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
+              -----END PUBLIC KEY-----
+          dryRun:
+            enable: true
+          skipUsers:
+          - objects: 
+            - kind: ReplicaSet
+            users: 
+            - system:serviceaccount:kube-system:deployment-controller
+          - objects: 
+            - kind: Pod
+            users:  
+            - system:serviceaccount:kube-system:replicaset-controller
+          - objects: 
+            - kind: Secret
+            users: 
+            - system:kube-controller-manager
