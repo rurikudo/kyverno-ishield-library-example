@@ -28,22 +28,20 @@ spec:
       validate:
         manifest:
           keys:
-          - |-
+          # pub
+          - key: |-
               -----BEGIN PUBLIC KEY-----
               MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
               BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
               -----END PUBLIC KEY-----
-          - |-
+          # pub1
+          - key: |-
               -----BEGIN PUBLIC KEY-----
               MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEE8uGVnyDWPPlB7M5KOHRzxzPHtAy
               FdGxexVrR4YqO1pRViKxmD9oMu4I7K/4sM51nbH65ycB2uRiDfIdRoV/+A==
               -----END PUBLIC KEY-----
-          verifyConfig:
-            validateLogic:  mustAll # mustAll or atLeastOne
-            messageAnnotation: cosign.sigstore.dev/message
-            signatureAnnotations: 
-            - kyverno.cosign.sigstore.dev/signature
-            - cosign.sigstore.dev/signature
+          keyOperation:  mustAll # mustAll or atLeastOne
+          # annotationDomain: "kyverno.cosign.sigstore.dev"
           skipUsers:
           - objects: 
             - kind: ReplicaSet
@@ -57,23 +55,3 @@ spec:
             - kind: Secret
             users: 
             - system:kube-controller-manager
-          ignoreFields:
-          - objects:
-            - kind: Service
-            fields:
-            - spec.sessionAffinity
-            - spec.type
-            - spec.ipFamilies.*
-            - spec.ipFamilyPolicy
-            - spec.internalTrafficPolicy
-          - objects:
-            - kind: ClusterPolicy
-            - kind: Policy
-            fields:
-            - metadata.annotations.pod-policies.kyverno.io/autogen-controllers
-            - spec.failurePolicy
-            - spec.rules.*.match.any.0.resources.kinds.*
-            - spec.rules.*.name
-            - spec.rules.*.validate.message
-            - spec.rules.*.validate.deny.conditions.all.*
-            - spec.background
