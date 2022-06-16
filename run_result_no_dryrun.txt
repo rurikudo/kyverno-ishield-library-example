@@ -39,6 +39,12 @@ Pod is not ready...
 Pod is not ready...
 Pod is not ready...
 Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
 Pod is ready
 
 ----------
@@ -47,6 +53,7 @@ clusterpolicy.kyverno.io/validate-resources created
 
 ----------
 [5] Checking if policy is ready to serve admission requests
+Defaulted container "kyverno" out of: kyverno, kyverno-pre (init)
 Policy is ready
 
 ----------
@@ -61,8 +68,8 @@ Error from server: error when creating "deploy/test-role.yaml": admission webhoo
 resource Role/test-ns/test-role was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -78,8 +85,8 @@ Error from server: error when creating "deploy/test-rolebinding.yaml": admission
 resource RoleBinding/test-ns/test-rolebinding was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -95,8 +102,8 @@ Error from server: error when creating "deploy/test-clusterrole.yaml": admission
 resource ClusterRole//test-crole was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -112,8 +119,8 @@ Error from server: error when creating "deploy/test-clusterrolebinding.yaml": ad
 resource ClusterRoleBinding//test-crb was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -129,8 +136,8 @@ Error from server: error when creating "deploy/test-secret.yaml": admission webh
 resource Secret/test-ns/test-creds was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -146,8 +153,8 @@ Error from server: error when creating "deploy/test-configmap.yaml": admission w
 resource ConfigMap/test-ns/test-configmap was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -163,8 +170,8 @@ Error from server: error when creating "deploy/test-deployment.yaml": admission 
 resource Deployment/test-ns/test-deployment was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -172,9 +179,11 @@ deployment.apps/test-deployment created
 
 
 [TEST 3] Pod should be created
+Pod is not ready...
+Pod is not ready...
 Pod is ready
 NAME                               READY   STATUS    RESTARTS   AGE
-test-deployment-66b6c48dd5-bgc4s   1/1     Running   0          2s
+test-deployment-6595874d85-fkhhc   1/1     Running   0          6s
 
 
 --------------------
@@ -186,8 +195,8 @@ Error from server: error when creating "deploy/test-service.yaml": admission web
 resource Service/test-ns/test-service was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -203,8 +212,8 @@ Error from server: error when creating "deploy/test-serviceaccount.yaml": admiss
 resource ServiceAccount/test-ns/test-sa was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -220,8 +229,8 @@ Error from server: error when creating "deploy/test-kyverno-pol.yaml": admission
 resource Policy/test-ns/test-require-labels was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -241,8 +250,8 @@ Error from server: error when creating "deploy/test-kyverno-cpol.yaml": admissio
 resource ClusterPolicy//test-allowed-annotations was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'failed to verify manifest: failed to verify signature: failed
-    to get signature: `cosign.sigstore.dev/message` is not found in the annotations'
+  validate-resources: 'failed to verify signature: verification failed for 0 signature.
+    all trials: []'
 
 
 [TEST 2] Resource with Signature should be allowed
