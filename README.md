@@ -16,7 +16,7 @@ git clone git@github.com:rurikudo/kyverno-ishield-library-example.git
 1. Clone Kyverno fork repo
 ```
 git clone git@github.com:rurikudo/kyverno.git
-git checkout -b  yaml-signing-vr origin/yaml-signing-vr
+git checkout -b  dev/yaml-signing-sigstore origin/dev/yaml-signing-sigstore
 ```
 
 2. Build images
