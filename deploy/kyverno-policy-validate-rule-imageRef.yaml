@@ -12,19 +12,8 @@ spec:
       match:
         resources:
           kinds:
-            - ClusterRole
-            - ClusterRoleBinding
-            - ConfigMap
-            - Deployment
-            - Pod
-            - Role
-            - RoleBinding
-            - Secret
             - Service
-            - ServiceAccount
-            - ClusterPolicy
-            - Policy
-          name: test*
+          name: test-*
       validate:
         manifests:
           keys:
@@ -33,8 +22,7 @@ spec:
               MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
               BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
               -----END PUBLIC KEY-----
-          dryRun:
-            enable: true
+          resourceBundleRef: ghcr.io/rurikudo/test-service-sig:latest
           skipUsers:
           - objects: 
             - kind: ReplicaSet
