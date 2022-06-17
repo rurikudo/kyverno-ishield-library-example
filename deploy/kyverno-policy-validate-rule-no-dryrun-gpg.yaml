@@ -15,7 +15,7 @@ spec:
             - Service
           name: my-service
       validate:
-        manifest:
+        manifests:
           keys:
           - key: |-
               -----BEGIN PGP PUBLIC KEY BLOCK-----

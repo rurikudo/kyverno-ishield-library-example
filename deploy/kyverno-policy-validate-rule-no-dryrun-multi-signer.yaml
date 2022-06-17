@@ -12,17 +12,26 @@ spec:
       match:
         resources:
           kinds:
+            - ClusterRole
+            - ClusterRoleBinding
+            - ConfigMap
+            - Deployment
+            - Pod
+            - Role
+            - RoleBinding
+            - Secret
             - Service
-          name: test-*
+            - ServiceAccount
+            - ClusterPolicy
+            - Policy
+          name: test*
       validate:
         manifests:
           keys:
-          - key: |-
-              -----BEGIN PUBLIC KEY-----
-              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
-              BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
-              -----END PUBLIC KEY-----
-          resourceBundleRef: ghcr.io/rurikudo/test-service-sig:latest
+          - subject: rkudo@redhat.com
+          - subject: rurikudo@ibm.com
+          keyOperation:  mustAll # mustAll or atLeastOne
+          # annotationDomain: "kyverno.cosign.sigstore.dev"
           skipUsers:
           - objects: 
             - kind: ReplicaSet

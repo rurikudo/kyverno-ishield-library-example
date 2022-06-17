@@ -15,6 +15,6 @@ spec:
             - Deployment
           name: test*
       validate:
-        manifest:
+        manifests:
           keys:
           - subject: rkudo@redhat.com
