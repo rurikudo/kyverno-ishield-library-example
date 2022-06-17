@@ -4,7 +4,7 @@ This is a test for manifest verification using IntegrityShield library.
 Please use Kyverno code below.
 ```
 Git: git@github.com:rurikudo/kyverno.git
-Branch: yaml-signing-vr
+Branch: dev/yaml-signing-sigstore
 ```
 
 ## How to run test
@@ -44,4 +44,5 @@ $ export KYVERNO_DIR=/home/repo/kyverno
 ```
 cd /home/repo/kyverno-ishield-library-example 
 ./auto_run.sh
+./auto_run_no_dryrun.sh
 ```
