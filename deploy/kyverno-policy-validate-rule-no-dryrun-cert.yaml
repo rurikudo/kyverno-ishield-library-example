@@ -1,0 +1,83 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-resources
+spec:
+  validationFailureAction: enforce
+  background: false
+  webhookTimeoutSeconds: 30
+  failurePolicy: Fail  
+  rules:
+    - name: validate-resources
+      match:
+        resources:
+          kinds:
+            - ClusterRole
+            - ClusterRoleBinding
+            - ConfigMap
+            - Deployment
+            - Pod
+            - Role
+            - RoleBinding
+            - Secret
+            - Service
+            - ServiceAccount
+            - ClusterPolicy
+            - Policy
+          name: test*
+      validate:
+        manifests:
+          attestors:
+          - count: 1
+            entries:
+            - certificates:
+                cert: |-
+                    -----BEGIN CERTIFICATE-----
+                    MIICoTCCAYkCCQCpfNIImSC5fjANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDDAd0
+                    ZXN0X2NhMB4XDTIyMDcxOTA3NTYxM1oXDTIyMDgxODA3NTYxM1owEzERMA8GA1UE
+                    AwwIdGVzdC5zdmMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPBiPx
+                    qwrUrhCxqDWx5vh+C9E+XO7WWTfxwDGkmFisX+L1NgL99Qn0Vosu9S9U5I8DpC80
+                    W5B9X0FTKw8UeTIAzrrLsWL9M4urJk1/+1CEcPlelQrL8lU3MBN9u1vecY32yzCA
+                    /Hc7eWVGx9g+QRs+gvGxUR65DWA9skV476+iFceWF4sUc8gRGj+g0EMIIqTz1Fj9
+                    RYKv/M19mCLAHEMu1pSbwtRo1anbDD6pubNhMW41IBGn1cuvc3LvVV+6CBXK7eUm
+                    agBvnX04mit1+Y90armNkKSr/DqoHabLTFHE/b64QLfA85jCcYTjHjET4pcrPnlW
+                    LG7123naSVGy96Z7AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAH2FvUDbcWExQe7p
+                    Z41DGxe36Uf5FWkgmlKsqjqjvT7x+eu0rwR8kdgq6INhhZS2hZhxpegol7nNYjc5
+                    8yFRClfhaYYwdcS6Fob+CBdanAajFmB75e6tdQMgpNRSemlLDm3gG6mNrMZgAEts
+                    2C/KuVGtj8bPRCP4xe/GEXJe4cyQqU4HBn+JeigcqcyAE6KyC7PML6QUUTWaLdMC
+                    Ipq4E9Qxv+pDBcR5LOBeKeS1x1I0RVUbES2wZU07u/VLXCn51DZOhsHvMOnzFBao
+                    MZRRI9rHYJj4ftM9Tn9CCYhbFI1/12U5HZdDdX1wWqZQMSpJ3N2V46pNvbn9hY1L
+                    X2+ldR8=
+                    -----END CERTIFICATE-----
+                certChain: |-
+                    -----BEGIN CERTIFICATE-----
+                    MIICoDCCAYgCCQCBo8AUUzSlhzANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDDAd0
+                    ZXN0X2NhMB4XDTIyMDcxOTA3NTYxM1oXDTQ5MTIwNDA3NTYxM1owEjEQMA4GA1UE
+                    AwwHdGVzdF9jYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMD+difq
+                    CST3zYhUcz7817PuE9PHgL+9mxk8g0TZHRsCH1rZqBn5bMNI7ShALLhcPTxKD2mh
+                    7SUQvJQEi2VBECMNRm4JkKwvrG/l3I8HCG9U/OxssoP28zsfZLtm3rfQTmtKAjGw
+                    tGuUTD1loWlStJq0ij3TWBDMwur5B3xI+JxPcOlsi9ZZvf7OT3+hxxeulkq+GvWf
+                    tplfHqoigs+L3WCdEDmakJiGh+A1qkVnyX/HLYYjhN8fiMThIrjPQ103H8Qmg0hg
+                    nQzhEHp/A0JBkmWqlLjvZeuI+U8N33LgdlNmQxxONWG92NA9frf+QQSFBYy3syA8
+                    erdTt9BYCzW1vu8CAwEAATANBgkqhkiG9w0BAQsFAAOCAQEARKmliXZ479hCB255
+                    XlKEVsS5UVWEXETSM9kRZEnPeOYTcbOL7il2vz1nCMHCO/3bVpFCB7q0Fo5JUlWh
+                    lViVEcDzE0GbOIWqYMFADPTZblZFFa2kKnEMnj2Da0Kbz8v5hX9/EXzR6E8MWQEw
+                    4NDw0FkOVXeRCEyXgZFy9kzAav8BzzrxJSlUsPrt0orwhIU4bIf5TfemIel/RC3G
+                    wdoVHX92dTO7po4ubbE7l8QlAz5mPSwr0ydxQ94SuGOKgIdx1dcWDXCqgOa7dcFL
+                    rKYCKAgM/haexwEjtqBI5mnHgNFxOKKfLGF3V2RiZf5UyYBepp+dowFrPELdi8Rt
+                    wTm4xw==
+                    -----END CERTIFICATE-----
+          # annotationDomain: "kyverno.cosign.sigstore.dev"
+          skipUsers:
+          - objects: 
+            - kind: ReplicaSet
+            users: 
+            - system:serviceaccount:kube-system:deployment-controller
+          - objects: 
+            - kind: Pod
+            users:  
+            - system:serviceaccount:kube-system:replicaset-controller
+          - objects: 
+            - kind: Secret
+            users: 
+            - system:kube-controller-manager

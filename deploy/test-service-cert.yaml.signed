@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wAqAdX+H4sIAAAAAAAA/+ySP0/DMBDFM+dT3BcIcf44ab0hZqRKVKzIOJcQNY6t87XQfnpUFyEG1Knd8lves+8NPusxBs4C0mE0mBkkfjhqOyU3RQghmrqO2jYyqigv52irMinqspG1LEVRJqKqykIkIG77jP/ZB9aUCEG7feeu5ALrvr8y/9nlV/ODprx3U4cU8qPMZb2q3mYb2pN879ia9e7L2urz4xwe5nybG2c9YQjjPGSsKRtOWdc2fa+b1bqW9/oL7cdXpDC6WcGhSHfj3Cl4ufQhtci606xVCjBriwr+1iUNHs155B1xOJssWgUrkQIAeHLsjJsUbJ828YY1DcibGFpXbZMCBJzQsCMVA9p7Bc/HR+/TOy28sLCwsBD5DgAA///zkIHMAAgAAAEAAP//Q04KdSoBAAA=
+    cosign.sigstore.dev/signature: LiAF0NS3HiYnHkEsoirDFqsjSwyc5cakpu9Y99sbLVtbYLaw3+T+tj31htaLegKwIe3aq4IJr3QlcsgiKp8CDrOFH3DYMvPL5hYAo/V5bbMz9qoJyuYBYK17MB+LhF9eKUjilpODoH9EV9Xg2KcOCVYXZz6MUjt5cwKEkYQhfsECqKi4ZvZbt/zbrej081tQcXAAU1qb4udFORLkSskdw+jnfo6dKBVfSgfYieNHqmBCk6jwKIBqujMZLFedHwBcyWIgqRRegQ0OHTVIKDbefkQAPcnshZ6Vra05tbjPLeCz7GLdyHExRlPtd9sXvBr00zRCR4RPp+pG25cBh6Qxvw==
+  name: test-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9376
+  selector:
+    app: MyApp

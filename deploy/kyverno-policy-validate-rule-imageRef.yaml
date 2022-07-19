@@ -16,13 +16,16 @@ spec:
           name: test-*
       validate:
         manifests:
-          keys:
-          - key: |-
-              -----BEGIN PUBLIC KEY-----
-              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
-              BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
-              -----END PUBLIC KEY-----
-          resourceBundleRef: ghcr.io/rurikudo/test-service-sig:latest
+          attestors:
+          - entries:
+            - keys:
+                # pub
+                publicKeys: |-
+                    -----BEGIN PUBLIC KEY-----
+                    MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
+                    BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
+                    -----END PUBLIC KEY-----
+              repository: ghcr.io/rurikudo/test-service-sig:latest
           skipUsers:
           - objects: 
             - kind: ReplicaSet
