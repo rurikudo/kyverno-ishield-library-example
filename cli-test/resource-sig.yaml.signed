@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wApAdb+H4sIAAAAAAAA/+yQsW7jMBBEVesr9gd0okWKstkdrj7AQIy0AUOtFcGiSOzSTuyvD0wHKV0mSKDXzJAzW+zWJ0v1Pkw9Etfntm7VWj7NnrtL+9wn7zaHN+/l64sQQgxzvatd8JGQeZyHKlmqhkuFAjeyaTst+6Ym5HAkhxWPw5+z9VNRXGe1Ulk73WYVze2drZTFSjWd0ForJQohm0apAkTxBRw5WSqEoMOxD3d6nOx+fyf/2OVTfwg2jo9IPIbZwGlVHsa5N/CAdBodlh6T7W2ypgSYrUcDCTlVfIubkiO6axYDJb6aKlsDa1ECAEQKKbgwGdj92+afZGnAtM2ljex0CcA4oUuBTC7YGA38P/+Nsfzu0ywsLCz8at4DAAD//8zfS0AACAAAAQAA///4C8FRKQEAAA==
+    cosign.sigstore.dev/signature: MEUCIHRF6N+YOUeszqAvGtsjvhSidCMHArHrzs05emoxAhhgAiEAjmPSsEGMtYsJbMyYPPT8QgsidTNnV9aCglZQi+I9Ht4=
+  name: test-service2
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9376
+  selector:
+    app: MyApp

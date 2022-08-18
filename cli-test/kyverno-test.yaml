@@ -1,0 +1,21 @@
+name: manifest-signing-verification
+policies:
+  - validate-manifests-policy.yaml
+resources:
+  - resource.yaml
+results:
+  - policy: validate-resources
+    rule: validate-resources
+    resource: test-service
+    kind: Service
+    result: fail
+  - policy: validate-resources
+    rule: validate-resources
+    resource: test-service2
+    kind: Service
+    result: pass
+  - policy: validate-resources
+    rule: validate-resources-all-sig
+    resource: test-service3
+    kind: Service
+    result: pass
