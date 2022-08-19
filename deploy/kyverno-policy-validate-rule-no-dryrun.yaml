@@ -4,7 +4,7 @@ metadata:
   name: validate-resources
 spec:
   validationFailureAction: enforce
-  background: false
+  background: true
   webhookTimeoutSeconds: 30
   failurePolicy: Fail  
   rules:
@@ -64,22 +64,9 @@ spec:
             - kind: Deployment
             fields:
             - spec.replicas
-          # ignoreFields:
-          # - objects:
-          #   - kind: Service
-          #   fields:
-          #   - spec.sessionAffinity
-          #   - spec.type
-          #   - spec.ipFamilies.*
-          #   - spec.ipFamilyPolicy
-          # - objects:
-          #   - kind: ClusterPolicy
-          #   - kind: Policy
-          #   fields:
-          #   - metadata.annotations.pod-policies.kyverno.io/autogen-controllers
-          #   - spec.failurePolicy
-          #   - spec.rules.*.match.any.0.resources.kinds.*
-          #   - spec.rules.*.name
-          #   - spec.rules.*.validate.message
-          #   - spec.rules.*.validate.deny.conditions.all.*
-          #   - spec.background
+          - objects:
+            - kind: ClusterPolicy
+            - kind: Policy
+            fields:
+            - spec.rules.1.*
+            - spec.rules.2.*
