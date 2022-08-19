@@ -1,0 +1,36 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wCpAlb9H4sIAAAAAAAA/+xUTY/bNhD12b9ikIuBIpIlfza6FEHRHosFsui1GZNjizVFqpyht0qQ/15Qkp3ddXcvSW5+F2rMN28+9CwhluzYnSg4n7XeLvIOGzv5riiKotisVv253az7s1gMcXoqV8WkXC222025WZarSbFclptiAsX3beP/EVkwTIoiHKP2r/BYcL9/5X4c5nLOTxjme281BZ536/l69fPyL9fw9tN6p6VR747/Ns3yoU7kg5vfz5Vv2kDMxh0ywZAdPmW6oC29KxerzXL3A0ZPwNb8SYGNdxWMNsiNn5/K6dE4XcGdt0Z104YENQpWUwB0zguK8Y5TCI/zjnFHwZEQZ6ez7JsyX5Rvrpij5y60Ml/ni57VppqGOH9EVyh08KGr4AM2raUXiZpYBdNKrzn7QOFkFL1XykcnDA9GamiDORlLB2IQDyoQCsGd19yLAjTYwY4Ad5YSQXtgD+g0OGwIEJ6KgpeaAkiNDqQm8I4gMumv2qOskRzua8ND2x2omtSR+5w7r9+C2Y98DbvuqszbvgNyHAOdG02pH/kJ7Q9s6CPsDVkNDYqqaaiASiLaZ5r5IDN7cZkcd3+Tkqpv8GnuizlixFIFv6bp4ConrbAaRs8Yp9ySSibaoToego/Jcnu0nHYWoqXeYdkwSTVOHYh9DIr4/ANA8uqjMEv99tGzcn3PgZR32jwyMABae37M4EhdBbPPn683++XL7FLEtxRQfKjgt38iWr5cnNBGqmD20y8D+YTWaBQ6F2iIGQ9UwX1Nz7301DggyS53XoNhUN7tjRuuY/pKpPd6Kcq9NUeVh5ochOjcyEoS+UhtUYSC+7qs8yu4xFdTv7qMcTrj3e9obAz0Xg3/PYzayPQHfbZuuOGGG274RvwXAAD//1FLl6oADAAAAQAA///GjvlDqQIAAA==
+    cosign.sigstore.dev/signature: MEYCIQDjoT9kQ94Ml3zcfgL5TXHhNDxMUQeymAwM7ZK/UFeGygIhAKTLkJd1m+6X3V4ZC1OLbN/j0q9aJnsPgi7c93ttrxJ/
+    kyverno.io/kubernetes-version: "1.21"
+    kyverno.io/kyverno-version: 1.5.2
+    policies.kyverno.io/category: Sample
+    policies.kyverno.io/description: 'ServiceAccounts with privileges to create Pods
+      may be able to do so and name a ServiceAccount other than the one used to create
+      it. This policy checks the Pod, if created by a ServiceAccount, and ensures
+      the `serviceAccountName` field matches the actual ServiceAccount.      '
+    policies.kyverno.io/subject: Pod,ServiceAccount
+    policies.kyverno.io/title: Check ServiceAccount
+  name: check-sa
+spec:
+  background: false
+  rules:
+  - match:
+      resources:
+        kinds:
+        - Pod
+    name: check-sa
+    preconditions:
+      all:
+      - key: '{{serviceAccountName}}'
+        operator: Equals
+        value: '*?'
+    validate:
+      message: The ServiceAccount used to create this Pod is confined to using the
+        same account when running the Pod.
+      pattern:
+        spec:
+          serviceAccountName: '{{serviceAccountName}}'
+  validationFailureAction: audit

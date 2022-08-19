@@ -1,0 +1,37 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-resources
+spec:
+  validationFailureAction: enforce
+  background: false
+  webhookTimeoutSeconds: 30
+  failurePolicy: Fail  
+  rules:
+    - name: validate-resources
+      match:
+        any:
+        - resources:
+            kinds:
+              - ClusterPolicy
+              - Policy
+      validate:
+        manifests:
+          attestors:
+          - entries:
+            - keys: 
+                publicKeys:  |-
+                  -----BEGIN PUBLIC KEY-----
+                  MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEyQfmL5YwHbn9xrrgG3vgbU0KJxMY
+                  BibYLJ5L4VSMvGxeMLnBGdM48w5IE//6idUPj3rscigFdHs7GDMH4LLAng==
+                  -----END PUBLIC KEY-----
+          ignoreFields:
+          - objects:
+            - kind: ClusterPolicy
+            - kind: Policy
+            fields:
+            - spec.rules.1.*
+            - spec.rules.2.*
+          # dryRun:
+          #   enable: true
+          #   namespace: dryrun-ns 

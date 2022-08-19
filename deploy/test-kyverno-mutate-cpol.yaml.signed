@@ -1,0 +1,51 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wByA438H4sIAAAAAAAA/+xVzU7jSBDmzFOUuHDBjkMSmPENAQdWQkILO9el0i4nvekfT1d1WM9o3n3VjkMMLGi1mrmlLq0uf/XVf1uIJVu1awrOZzYKCmWq8SZv0ZqDnyNFURRn02l3np/NurM43dyLopiMZ+OD8fT0/Pzs7HQ8mR4Uk+nZpDiA4if5/1AiC4aDogirWPkPcCxY1x9875N5PkdrDKPam4oCj9rZaDb9NPnTWT7/NptXYtXn1d/WTp6WCbxwo4eR8rYJxKzdIhMM2eJbNi6mhPU5fabJp1+QehJs9BcKrL0roR+DXPvReny40q4q4dJEFgp33mjVHloSrFCwPARA57ygaO84XWFovopzCo6EOFtv2Y/G+en46A2yH71n2Dif5acdqvFV1iS/mjgfmGAUvyCXKe8keGMocAlXSNa7e5KTK2qMby05OfnNz0/u00jX0dyT9KxvGRUKLXxoS7hH2xh6F1gRq6Ab6SI9vnHA3hIoZGJofYQnH00FjqgC8SAhsoCKLN52lACXF6AoiK518slQ+wBoDMiSIOWD2lFg8DUg3PkqhxsBiytiYHJMiXVOoB0gXHpX68UtNj01e5AlSheHQgepTNZHJ4ncwrwF70wLTCLaLSAhnjuYw8NS8yblFrCquCdFWHsTbec4xTmIsQvizldbXSLt0tjlB7ruVDtHPa1CY6iCR+3+IiVZMuFHeNKyhDWaSPBIDueGqkfQqUjRVfnG8vjd3ljtXgxR8S6S4zy5LVP0J1+6/N7FihZDJVxUFVwOG4cMCM+2Di2VqW7ZsLvZpnaH3JBKKzJHtVqElEwJNRpOliEa6vYnA4uilmVfoUDsY1DEWwVAWsjBNUvhd7fNs739UvtAuCPKwGiWEgJ9jcSS+y73PMWU77r5zNqkIO4lpI3Q6pbCgnYuAbap7GTH8VKf9UU5/v4dyFDaxzxp4MeP4xdA6EfsNs3qK5KuLEl/h7IsYUSiRsxm1A3MK+S2CyQqYzbZW8zGz5s41XaRXvveMirMGrIsPtDhf/O4m4eX+iaQ8q7Sg1cT0l7tmrWitqvZq3ZtH9588OrmR8P1ORrW1TcUUHwo4fprRLMrQ7ddJfTb9b7Xzl579++kN+4V4WAoL3+/vni4Hij+uLtKil/0/9rLXvayl738P/knAAD//1rMOcsADgAAAQAA//870SXVcgMAAA==
+    cosign.sigstore.dev/signature: MEYCIQDQ/13NNVC1hHwXbbUKjrwo/tgQBUaPMdaDjKKwLDjjcAIhALRiMAxVO4rp0vgVWoKbYOPjzVc9VN7y0MyJiDhUDCpz
+    kyverno.io/kubernetes-version: "1.21"
+    kyverno.io/kyverno-version: 1.5.2
+    pod-policies.kyverno.io/autogen-controllers: DaemonSet,Deployment,Job,StatefulSet
+    policies.kyverno.io/category: Sample
+    policies.kyverno.io/description: 'In some cases you would need to trust custom
+      CA certificates for all the containers of a Pod. It makes sense to be in a ConfigMap
+      so that you can automount them by only setting an annotation. This policy adds
+      a volume to all containers in a Pod containing the certificate if the annotation
+      called `inject-certs` with value `enabled` is found.      '
+    policies.kyverno.io/minversion: 1.5.0
+    policies.kyverno.io/subject: Pod,Volume
+    policies.kyverno.io/title: Add Certificates as a Volume
+  name: add-certificates-volume
+spec:
+  background: false
+  rules:
+  - match:
+      resources:
+        kinds:
+        - Pod
+    mutate:
+      foreach:
+      - list: request.object.spec.containers
+        patchStrategicMerge:
+          spec:
+            containers:
+            - name: '{{ element.name }}'
+              volumeMounts:
+              - mountPath: /etc/ssl/certs
+                name: etc-ssl-certs
+            volumes:
+            - configMap:
+                name: ca-pemstore
+              name: etc-ssl-certs
+    name: add-ssl-certs
+    preconditions:
+      all:
+      - key: '{{request.object.metadata.annotations."inject-certs"}}'
+        operator: Equals
+        value: enabled
+      - key: '{{request.operation}}'
+        operator: In
+        value:
+        - CREATE
+        - UPDATE

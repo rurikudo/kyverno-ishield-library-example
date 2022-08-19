@@ -48,6 +48,7 @@ spec:
               - Secret
           subjects:
           - kind: User
+            name: system:kube-controller-manager
       validate:
         manifests:
           attestors:

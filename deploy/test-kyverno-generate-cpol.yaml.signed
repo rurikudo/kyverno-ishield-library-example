@@ -1,0 +1,56 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    cosign.sigstore.dev/message: H4sIAAAAAAAA/wDCAj39H4sIAAAAAAAA/+xVS2/iSBDmzK8o5cIlNgaMIb6tctjLZpWN0F5XTXcZ9+LudrrLME6U/z7yixgrZOaQSDNS6tJ0Pb56fNWY0JG3Lw9otfF2qNEyQo/nJvNLprLRR0gQBEEUhvW5ipb1Gcybe/VrtVqOZuF8tYpmi0UQjYJFuFrMRhB8SPYfSOGI2VEQ2H0hzDt+jliSvGNvmzmd0wOz08RkAq2blsvpMlwv/tPKrZ6WW0GK3+y/KbU4ppXzTk83U25UbtE5qXceMevtnrx1sliHQRhF6+TmE1qvhOXyX7ROGh1Duwa+NNPDbLyXWsRwmxWO0N6bTPJyrJCYYMTiMQDT2hAjabSrrgB55SPR+T0czgh3xpYx3BUZSW+DmmleXvQX6LiVOdX1TDYGtkiEFrjRZE0GlCLoQm3RgknAojOF5eiAUkY1KABnGrYI3CIjFCA1MNjJA2r4myl0OeMITAvIrTlIgSAwYUVGJ7AqlytUXUMLmUklyUFiLNwb4a7hofX9pzDEarS/KpcHpnfYq4rZ6saNUqgFCh82qXQtZt19CUeZZdC9u5/FPaZYdaXx+NpTCytd17nfKCYXZ+2K7f/IKT7Pet1LeTGUJGUYwx9CQB00BtBMYQxMCE8777FWuhx5tRq2yLDeEe/UadyW21+/w6xVdhvWSIfSScqs6N87enyeFzFchVdv2RSqegtn0Z/yzG7xsUB3KfpkfSO+eR9ns2stzSjavfI62h4HHjVrMUyen9ssvqn58LtH5ldeLy+TNsaVmqfWaPmEMZAtGnYUI5524zhtyOt8qip7V2+wME2pp//9Ya0fQlhDQV/jdcM55xGgJmEZBGqgP41/wF4L89AM8E20+WW0+TK6O8ejMscYbo0mJjXaM6YHz2JIc92lHZh/RY57hX7SN+VLvuRLfg/5HgAA//+ikJZeAAwAAAEAAP//Kgh4K8ICAAA=
+    cosign.sigstore.dev/signature: MEYCIQCYAKzmFtIZ+XOPd9FPrONTjZd2tdeirpJ5M4lfWHbJxQIhAIlw6NI3+tGS2Rf6aC9juecEEqLZA2c9UXM01jOAzr5z
+    policies.kyverno.io/category: Multi-Tenancy
+    policies.kyverno.io/description: 'To better control the number of resources that
+      can be created in a given Namespace and provide default resource consumption
+      limits for Pods, ResourceQuota and LimitRange resources are recommended. This
+      policy will generate ResourceQuota and LimitRange resources when a new Namespace
+      is created.      '
+    policies.kyverno.io/subject: ResourceQuota, LimitRange
+    policies.kyverno.io/title: Add Quota
+  name: add-ns-quota
+spec:
+  rules:
+  - generate:
+      apiVersion: v1
+      data:
+        spec:
+          hard:
+            limits.cpu: "4"
+            limits.memory: 16Gi
+            requests.cpu: "4"
+            requests.memory: 16Gi
+      kind: ResourceQuota
+      name: default-resourcequota
+      namespace: '{{request.object.metadata.name}}'
+      synchronize: true
+    match:
+      resources:
+        kinds:
+        - Namespace
+    name: generate-resourcequota
+  - generate:
+      apiVersion: v1
+      data:
+        spec:
+          limits:
+          - default:
+              cpu: 500m
+              memory: 1Gi
+            defaultRequest:
+              cpu: 200m
+              memory: 256Mi
+            type: Container
+      kind: LimitRange
+      name: default-limitrange
+      namespace: '{{request.object.metadata.name}}'
+      synchronize: true
+    match:
+      resources:
+        kinds:
+        - Namespace
+    name: generate-limitrange
