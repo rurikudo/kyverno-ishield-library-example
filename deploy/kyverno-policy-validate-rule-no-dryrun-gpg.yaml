@@ -52,16 +52,3 @@ spec:
                   =MZiY
                   -----END PGP PUBLIC KEY BLOCK-----
           annotationDomain: "verify-manifest.kyverno.io"
-          skipUsers:
-          - objects: 
-            - kind: ReplicaSet
-            users: 
-            - system:serviceaccount:kube-system:deployment-controller
-          - objects: 
-            - kind: Pod
-            users:  
-            - system:serviceaccount:kube-system:replicaset-controller
-          - objects: 
-            - kind: Secret
-            users: 
-            - system:kube-controller-manager

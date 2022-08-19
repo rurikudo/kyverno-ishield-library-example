@@ -1,13 +1,13 @@
-#!/bin/bash
-#
+# !/bin/bash
+
 # Copyright 2022 IBM Corporation.
-#
+
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-#
+
 # http://www.apache.org/licenses/LICENSE-2.0
-#
+
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -60,7 +60,7 @@ while :
 do 
   logs=`kubectl logs deployment.apps/kyverno -n kyverno | grep "policy is ready to serve admission requests" | wc -l`
   counts=`echo $logs`
-  if [ "$counts" != "1" ]; then
+  if [ "$counts" >= "1" ]; then
     echo "Policy is not ready..."
     sleep 5
   else
@@ -288,6 +288,88 @@ kubectl delete -f deploy/test-rolebinding.yaml.signed -n test-ns
 kubectl delete -f deploy/test-secret.yaml.signed -n test-ns
 kubectl delete -f deploy/test-service.yaml.signed -n test-ns
 kubectl delete -f deploy/test-serviceaccount.yaml.signed -n test-ns
+
+echo ""
+echo ""
+echo "Test for each Signing types....."
+echo "[1] ImageRef"
+echo "Creating Kyverno Policy...."
+kubectl create -f deploy/kyverno-policy-validate-rule-imageRef.yaml
+
+sleep 3
+echo "Creating signed resource...."
+kubectl create -f deploy/test-service.yaml -n test-ns
+
+echo "Deleting Kyverno Policy...."
+kubectl delete -f deploy/kyverno-policy-validate-rule-imageRef.yaml
+
+echo "Deleting signed resource...."
+kubectl delete -f deploy/test-service.yaml -n test-ns
+
+
+sleep 3
+echo ""
+echo "[2] Keyless"
+kubectl create -f deploy/kyverno-policy-validate-rule-keyless.yaml
+
+sleep 3
+echo "Creating signed resource...."
+kubectl create -f deploy/test-deployment-keyless.yaml.signed -n test-ns
+
+echo "Deleting Kyverno Policy...."
+kubectl delete -f deploy/kyverno-policy-validate-rule-keyless.yaml
+
+echo "Deleting signed resource...."
+kubectl delete -f deploy/test-deployment-keyless.yaml.signed -n test-ns
+
+
+sleep 3
+echo ""
+echo "[3] GPG"
+kubectl create -f deploy/kyverno-policy-validate-rule-no-dryrun-gpg.yaml
+
+sleep 3
+echo "Creating signed resource...."
+kubectl create -f deploy/test-service-gpg.yaml -n test-ns
+
+echo "Deleting Kyverno Policy...."
+kubectl delete -f deploy/kyverno-policy-validate-rule-no-dryrun-gpg.yaml
+
+echo "Deleting signed resource...."
+kubectl delete -f deploy/test-service-gpg.yaml -n test-ns
+
+
+sleep 3
+echo ""
+echo "[2] Cert"
+kubectl create -f deploy/kyverno-policy-validate-rule-no-dryrun-cert.yaml
+
+sleep 3
+echo "Creating signed resource...."
+kubectl create -f deploy/test-service-cert.yaml.signed -n test-ns
+
+echo "Deleting Kyverno Policy...."
+kubectl delete -f deploy/kyverno-policy-validate-rule-no-dryrun-cert.yaml
+
+echo "Deleting signed resource...."
+kubectl delete -f deploy/test-service-cert.yaml.signed -n test-ns
+
+
+
+sleep 3
+echo ""
+echo "[2] Multi signatures"
+kubectl create -f deploy/kyverno-policy-validate-rule-no-dryrun-multi-sig.yaml
+
+sleep 3
+echo "Creating signed resource...."
+kubectl create -f deploy/test-service-multi-sig.yaml.signed.signed -n test-ns
+
+echo "Deleting Kyverno Policy...."
+kubectl delete -f deploy/kyverno-policy-validate-rule-no-dryrun-multi-sig.yaml
+
+echo "Deleting signed resource...."
+kubectl delete -f deploy/test-service-multi-sig.yaml.signed.signed -n test-ns
 
 
 echo "[9] Deleting Kyverno"

@@ -37,6 +37,18 @@ deployment.apps/kyverno created
 No resources found in kyverno namespace.
 Pod is not ready...
 Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
 Pod is ready
 
 ----------
@@ -46,6 +58,7 @@ clusterpolicy.kyverno.io/validate-resources created
 ----------
 [5] Checking if policy is ready to serve admission requests
 Defaulted container "kyverno" out of: kyverno, kyverno-pre (init)
+./auto_run_no_dryrun.sh: line 63: [: 0: unary operator expected
 Policy is ready
 
 ----------
@@ -57,12 +70,12 @@ Policy is ready
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-role.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource Role/test-ns/test-role was blocked due to the following policies
+policy Role/test-ns/test-role for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -75,12 +88,12 @@ role.rbac.authorization.k8s.io/test-role created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-rolebinding.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource RoleBinding/test-ns/test-rolebinding was blocked due to the following policies
+policy RoleBinding/test-ns/test-rolebinding for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -93,12 +106,12 @@ rolebinding.rbac.authorization.k8s.io/test-rolebinding created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-clusterrole.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource ClusterRole//test-crole was blocked due to the following policies
+policy ClusterRole//test-crole for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -111,12 +124,12 @@ clusterrole.rbac.authorization.k8s.io/test-crole created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-clusterrolebinding.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource ClusterRoleBinding//test-crb was blocked due to the following policies
+policy ClusterRoleBinding//test-crb for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -129,12 +142,12 @@ clusterrolebinding.rbac.authorization.k8s.io/test-crb created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-secret.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource Secret/test-ns/test-creds was blocked due to the following policies
+policy Secret/test-ns/test-creds for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -147,12 +160,12 @@ secret/test-creds created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-configmap.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource ConfigMap/test-ns/test-configmap was blocked due to the following policies
+policy ConfigMap/test-ns/test-configmap for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -165,12 +178,12 @@ configmap/test-configmap created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-deployment.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource Deployment/test-ns/test-deployment was blocked due to the following policies
+policy Deployment/test-ns/test-deployment for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -180,19 +193,9 @@ deployment.apps/test-deployment created
 [TEST 3] Pod should be created
 Pod is not ready...
 Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
-Pod is not ready...
 Pod is ready
 NAME                               READY   STATUS    RESTARTS   AGE
-test-deployment-6595874d85-bb6x7   1/1     Running   0          27s
+test-deployment-6595874d85-xlpm2   1/1     Running   0          7s
 
 
 --------------------
@@ -201,12 +204,12 @@ test-deployment-6595874d85-bb6x7   1/1     Running   0          27s
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-service.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource Service/test-ns/test-service was blocked due to the following policies
+policy Service/test-ns/test-service for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -219,12 +222,12 @@ service/test-service created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-serviceaccount.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource ServiceAccount/test-ns/test-sa was blocked due to the following policies
+policy ServiceAccount/test-ns/test-sa for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -237,12 +240,12 @@ serviceaccount/test-sa created
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-kyverno-pol.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource Policy/test-ns/test-require-labels was blocked due to the following policies
+policy Policy/test-ns/test-require-labels for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -259,12 +262,12 @@ test-require-labels   true         enforce
 [TEST 1] Resource without Signature should be blocked
 Error from server: error when creating "deploy/test-kyverno-cpol.yaml": admission webhook "validate.kyverno.svc-fail" denied the request:
 
-resource ClusterPolicy//test-allowed-annotations was blocked due to the following policies
+policy ClusterPolicy//test-allowed-annotations for resource violation:
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -293,6 +296,54 @@ rolebinding.rbac.authorization.k8s.io "test-rolebinding" deleted
 secret "test-creds" deleted
 service "test-service" deleted
 serviceaccount "test-sa" deleted
+
+
+Test for each Signing types.....
+[1] ImageRef
+Creating Kyverno Policy....
+clusterpolicy.kyverno.io/validate-resources created
+Creating signed resource....
+service/test-service created
+Deleting Kyverno Policy....
+clusterpolicy.kyverno.io "validate-resources" deleted
+Deleting signed resource....
+service "test-service" deleted
+
+[2] Keyless
+clusterpolicy.kyverno.io/validate-resources created
+Creating signed resource....
+deployment.apps/test-deployment-keyless created
+Deleting Kyverno Policy....
+clusterpolicy.kyverno.io "validate-resources" deleted
+Deleting signed resource....
+deployment.apps "test-deployment-keyless" deleted
+
+[3] GPG
+clusterpolicy.kyverno.io/validate-resources created
+Creating signed resource....
+service/my-service created
+Deleting Kyverno Policy....
+clusterpolicy.kyverno.io "validate-resources" deleted
+Deleting signed resource....
+service "my-service" deleted
+
+[2] Cert
+clusterpolicy.kyverno.io/validate-resources created
+Creating signed resource....
+service/test-service created
+Deleting Kyverno Policy....
+clusterpolicy.kyverno.io "validate-resources" deleted
+Deleting signed resource....
+service "test-service" deleted
+
+[2] Multi signatures
+clusterpolicy.kyverno.io/validate-resources created
+Creating signed resource....
+service/test-service created
+Deleting Kyverno Policy....
+clusterpolicy.kyverno.io "validate-resources" deleted
+Deleting signed resource....
+service "test-service" deleted
 [9] Deleting Kyverno
 namespace "kyverno" deleted
 customresourcedefinition.apiextensions.k8s.io "clusterpolicies.kyverno.io" deleted

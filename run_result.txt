@@ -1,4 +1,4 @@
-run_result.txt[1] Creating test namespace
+[1] Creating test namespace
 namespace/test-ns created
 
 [2] Installing Kyverno
@@ -36,6 +36,17 @@ deployment.apps/kyverno created
 
 ----------
 [3] Checking if Kyverno pod is ready
+No resources found in kyverno namespace.
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
+Pod is not ready...
 Pod is ready
 
 ----------
@@ -59,9 +70,9 @@ Error from server: error when creating "deploy/test-role.yaml": admission webhoo
 resource Role/test-ns/test-role was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -77,9 +88,9 @@ Error from server: error when creating "deploy/test-rolebinding.yaml": admission
 resource RoleBinding/test-ns/test-rolebinding was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -95,9 +106,9 @@ Error from server: error when creating "deploy/test-clusterrole.yaml": admission
 resource ClusterRole//test-crole was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -113,9 +124,9 @@ Error from server: error when creating "deploy/test-clusterrolebinding.yaml": ad
 resource ClusterRoleBinding//test-crb was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -131,9 +142,9 @@ Error from server: error when creating "deploy/test-secret.yaml": admission webh
 resource Secret/test-ns/test-creds was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -149,9 +160,9 @@ Error from server: error when creating "deploy/test-configmap.yaml": admission w
 resource ConfigMap/test-ns/test-configmap was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -167,9 +178,9 @@ Error from server: error when creating "deploy/test-deployment.yaml": admission 
 resource Deployment/test-ns/test-deployment was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -181,7 +192,7 @@ Pod is not ready...
 Pod is not ready...
 Pod is ready
 NAME                               READY   STATUS    RESTARTS   AGE
-test-deployment-6595874d85-nzz6g   1/1     Running   0          7s
+test-deployment-6595874d85-nqcp6   1/1     Running   0          6s
 
 
 --------------------
@@ -193,9 +204,9 @@ Error from server: error when creating "deploy/test-service.yaml": admission web
 resource Service/test-ns/test-service was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -211,9 +222,9 @@ Error from server: error when creating "deploy/test-serviceaccount.yaml": admiss
 resource ServiceAccount/test-ns/test-sa was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -229,9 +240,9 @@ Error from server: error when creating "deploy/test-kyverno-pol.yaml": admission
 resource Policy/test-ns/test-require-labels was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -251,9 +262,9 @@ Error from server: error when creating "deploy/test-kyverno-cpol.yaml": admissio
 resource ClusterPolicy//test-allowed-annotations was blocked due to the following policies
 
 validate-resources:
-  validate-resources: 'error occured during manifest verification: manigest verification
-    failed; verifiedCount 0; requiredCount 1; .attestors[0].entries[0].keys: failed
-    to verify signature: verification failed for 0 signature. all trials: []'
+  validate-resources: 'manifest verification failed; verifiedCount 0; requiredCount
+    1; message .attestors[0].entries[0].keys: YAML manifest not found for this resource:
+    message not found'
 
 
 [TEST 2] Resource with Signature should be allowed
@@ -314,3 +325,4 @@ service "kyverno-svc-metrics" deleted
 deployment.apps "kyverno" deleted
 [10] Deleting test namespace
 namespace "test-ns" deleted
+rkudo kyverno-ishield-library-example
